@@ -5,47 +5,46 @@ require_relative 'display'
 class Board
 
   WHITE_PIECE_HASH = {
-    Piece.new(:rook)   => [7,0],
-    Piece.new(:knight) => [7,1],
-    Piece.new(:bishop) => [7,2],
-    Piece.new(:queen)  => [7,3],
-    Piece.new(:king)   => [7,4],
-    Piece.new(:bishop) => [7,5],
-    Piece.new(:knight) => [7,6],
-    Piece.new(:rook)   => [7,7],
-    Piece.new(:pawn)   => [6,0],
-    Piece.new(:pawn)   => [6,1],
-    Piece.new(:pawn)   => [6,2],
-    Piece.new(:pawn)   => [6,3],
-    Piece.new(:pawn)   => [6,4],
-    Piece.new(:pawn)   => [6,5],
-    Piece.new(:pawn)   => [6,6],
-    Piece.new(:pawn)   => [6,7]
+    Piece.new(:white, "rook")   => [7,0],
+    Piece.new("w", "knight") => [7,1],
+    Piece.new("w", "bishop") => [7,2],
+    Piece.new("w", "queen")  => [7,3],
+    Piece.new("w", "king")   => [7,4],
+    Piece.new("w", "bishop") => [7,5],
+    Piece.new("w", "knight") => [7,6],
+    Piece.new("w", "rook")   => [7,7],
+    Piece.new("w", "pawn")   => [6,0],
+    Piece.new("w", "pawn")   => [6,1],
+    Piece.new("w", "pawn")   => [6,2],
+    Piece.new("w", "pawn")   => [6,3],
+    Piece.new("w", "pawn")   => [6,4],
+    Piece.new("w", "pawn")   => [6,5],
+    Piece.new("w", "pawn")   => [6,6],
+    Piece.new("w", "pawn")   => [6,7]
   }
 
   BLACK_PIECE_HASH = {
-    Piece.new(:rook)   => [0,7],
-    Piece.new(:knight) => [0,6],
-    Piece.new(:bishop) => [0,5],
-    Piece.new(:queen)  => [0,4],
-    Piece.new(:king)   => [0,3],
-    Piece.new(:bishop) => [0,2],
-    Piece.new(:knight) => [0,1],
-    Piece.new(:rook)   => [0,0],
-    Piece.new(:pawn)   => [1,7],
-    Piece.new(:pawn)   => [1,6],
-    Piece.new(:pawn)   => [1,5],
-    Piece.new(:pawn)   => [1,4],
-    Piece.new(:pawn)   => [1,3],
-    Piece.new(:pawn)   => [1,2],
-    Piece.new(:pawn)   => [1,1],
-    Piece.new(:pawn)   => [1,0]
+    Piece.new("b", "rook")   => [0,7],
+    Piece.new("b", "knight") => [0,6],
+    Piece.new("b", "bishop") => [0,5],
+    Piece.new("b", "queen")  => [0,4],
+    Piece.new("b", "king")   => [0,3],
+    Piece.new("b", "bishop") => [0,2],
+    Piece.new("b", "knight") => [0,1],
+    Piece.new("b", "rook")   => [0,0],
+    Piece.new("b", "pawn")   => [1,7],
+    Piece.new("b", "pawn")   => [1,6],
+    Piece.new("b", "pawn")   => [1,5],
+    Piece.new("b", "pawn")   => [1,4],
+    Piece.new("b", "pawn")   => [1,3],
+    Piece.new("b", "pawn")   => [1,2],
+    Piece.new("b", "pawn")   => [1,1],
+    Piece.new("b", "pawn")   => [1,0]
   }
-
 
   attr_reader :grid
   def initialize
-    @grid = Array.new(8){Array.new(8, NullPiece.new)}
+    @grid = Array.new(8){Array.new(8, NullPiece.instance)}
     set_up_board
   end
 
@@ -54,9 +53,9 @@ class Board
     grid[row][col]
   end
 
-  def []=(pos, value)
+  def []=(pos, symbol)
     row, col = pos
-    grid[row][col] = value
+    grid[row][col] = symbol
   end
 
   def set_up_board
@@ -79,6 +78,6 @@ class Board
   end
 
   def valid_pos?(move)
-    move.all?{|el| el.between?(0..7) }
+    move.all?{|el| el.between?(0, 7) }
   end
 end
